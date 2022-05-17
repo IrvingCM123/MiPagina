@@ -25,15 +25,20 @@ router.get("/CajaComentario", function(req, res) {
 router.get("/MandarInfo", function(req, res) {
   res.render("MandarIinfo.html")
 })
+
 router.get("/Glosario", function(req, res) {
   res.render("Glosario.html")
+})
+
+router.get("/Prueba", function(req, res) {
+  res.render("Prueba.html")
 })
 
 router.get("/Catalogo/Glosario", function(req, res) {
   res.render("Glosario_A.html")
 })
 
-router.get("/Servidor", verUsuarios); //GET = Obtener información
+router.get("/Servidor/MostrarUsuarios", verUsuarios); //GET = Obtener información
 
 router.post("/Servidor", AltaUsuario);
 

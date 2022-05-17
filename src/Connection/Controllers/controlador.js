@@ -1,11 +1,19 @@
 import { getConnection, sql, querys } from "../Database"
+var fs = require('fs');
 
-export const verUsuarios = async (req, res) => {
+export const verUsuarios = async (req, res, fields) => {
   try {
     const pool = await getConnection();
     const result = await pool.request().query(querys.verUsuarios);
     console.log(result.recordset);
-    res.json(result);
+    Info = res.json(result);
+    res.Info;
+
+    var Guardar = JSON.stringify(Info);
+
+    fs.writeFile("thing.json", Guardar, function(err, result) {
+      if(err) console.log('error', err);
+  });
   } catch (error) {
     res.status(500);
     res.send(error.message);
@@ -39,39 +47,30 @@ export const AltaUsuario = async (req, res) => {
 
 export const EncontrarUsuario = async (req, res) => {
   const { Id } = req.params;
-
   const pool = await getConnection()
-
   const result = await pool
     .request()
     .input("Id", sql.Int, Id)
     .query(querys.EncontrarUsuario)
-
     res.send(result.recordset[0])
 }
 
 export const EliminarUsuario = async (req, res) => {
   const { Id } = req.params;
-
   const pool = await getConnection()
-
   const result = await pool
     .request()
     .input("Id", sql.Int, Id)
     .query(querys.EliminarUsuario)
-
     res.sendStatus(204)
 }
 
 
 export const ContarUsuario = async (req, res) => {
-
   const pool = await getConnection()
-
   const result = await pool
     .request()
     .query(querys.ContarUsuarios)
-
     res.json(result.recordset[0][''])
 }
 
@@ -92,9 +91,7 @@ export const ActualizarUsuarios = async (req, res) => {
       .input("Correo", sql.VarChar, Correo_Electronico)
       .input("Contraseña", sql.VarChar, Contraseña)
       .query(querys.ActualizarUsuario);
-
     res.json({ Nombre_Usuario, Apellido_Usuario, Correo_Electronico, Contraseña });
-
   } catch (error) {
     res.status(500);
     res.send(error.message);

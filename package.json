@@ -334,7 +334,8 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "dev": "nodemon src/index.js --exec babel-node"
+    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",

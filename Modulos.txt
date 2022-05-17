@@ -1,0 +1,1 @@
+npm i express morgan nodemon mssql cors dotenv
